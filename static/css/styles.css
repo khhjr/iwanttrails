@@ -1,0 +1,56 @@
+body {
+  scroll-behavior: smooth;
+}
+
+.hero-section, .about-section {
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.project-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.project-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+.project-card img {
+  height: 400px;
+  object-fit: cover;
+}
+.carousel-item img {
+  height: 400px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(1);
+}
+
+.nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.5);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  .nav-arrow:hover {
+    background: rgba(0,0,0,0.7);
+  }
+  .prev-arrow { left: 10px; }
+  .next-arrow { right: 10px; }
+

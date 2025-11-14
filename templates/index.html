@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TRAILS</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+
+<!-- ======================== -->
+<!-- NAVBAR -->
+<!-- ======================== -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="#">Trailbuilding</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ======================== -->
+<!-- HERO SECTION -->
+<!-- ======================== -->
+<header id="home" class="vh-100 d-flex align-items-center text-center text-white hero-section" style="background-image: url('{{ url_for('static', filename='img/hero-bg.jpg') }}');">
+  <div class="container">
+    <h1 class="display-1 fw-bold">HIKE</h1>
+    <h1 class="display-1 fw-bold">BIKE</h1>
+    <h1 class="display-1 fw-bold">RIDE</h1>
+    <h1 class="display-5 fw-bold">on your land</h4>
+  </div>
+</header>
+
+<!-- ======================== -->
+<!-- ABOUT SECTION -->
+<!-- ======================== -->
+<section id="about" class="vh-100 d-flex align-items-center text-center text-white about-section" style="background-image: url('{{ url_for('static', filename='img/about-bg.jpg') }}');">
+  <div class="container">
+    <h2 class="fw-bold mb-4">About Me</h2>
+    <p class="lead">
+    My passion is to build trails on private property.
+    </p>
+  </div>
+</section>
+
+<!-- ======================== -->
+<!-- SERVICES SECTION -->
+<!-- ======================== -->
+<section id="services" class="py-5 text-center">
+  <div class="container">
+    <h2 class="fw-bold mb-5">Services</h2>
+    <div class="row row-cols-1 g-5">
+      <div class="col-md-8">
+        <h5 class="fw-bold mb-3">Trail Layout</h5>
+        <p></p>
+      </div>
+      <div class="col-md-8">
+        <h5 class="fw-bold mb-3">Tail Building</h5>
+        <p></p>
+      </div>
+      <div class="col-md-4">
+        <h5 class="fw-bold mb-3">Trail Repairs</h5>
+        <p></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== -->
+<!-- PROJECTS SECTION -->
+<!-- ======================== -->
+<section id="projects" class="py-5 bg-light text-center">
+  <div class="container">
+    <h2 class="fw-bold mb-5">Projects</h2>
+    <div class="row row-cols-1 g-5">
+      {% for project in data %}
+      <!-- Projects -->
+      <div class="col-md-8 mx-auto">
+        <div class="card project-card shadow-sm">
+          <img src="{{ url_for('static', filename=project.top_image) }}"
+            class="card-img-top"
+            alt="{{ project.name }}"
+            data-bs-toggle="modal"
+            data-bs-target="#{{ project.name }}Modal">
+        </div>
+        <p>{{ project.description }}</p>
+      </div>
+      {% endfor %}
+    </div>
+
+      <!-- Videos -->
+      <div class="container text-center my-5">
+        <div class="col-md-8 mx-auto">
+          <div class="ratio ratio-16x9">
+            <iframe
+              src="https://www.youtube.com/embed/tuICghSQXcI"
+              title="YouTube video"
+              allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ======================== -->
+<!-- MODALS WITH CAROUSELS -->
+<!-- ======================== -->
+{% for project in data %}
+<div class="modal fade" id="{{ project.name }}Modal" tabindex="-1" aria-labelledby="{{ project.name }}Label" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="{{ project.name }}Label">{{ project.name }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div id="{{ project.name }}Carousel" class="carousel slide mb-3" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            {% for image in project.images %}
+            <div class="carousel-item active"><img src="{{ url_for('static', filename=image) }}" class="d-block w-100 rounded"></div>
+            {% endfor %}
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#{{ project.name }}Carousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#{{ project.name }}Carousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+          </button>
+        </div>
+        <p>{{ project.description }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+<!-- ======================== -->
+<!-- CONTACT SECTION -->
+<!-- ======================== -->
+<section id="contact" class="py-5 text-center bg-dark text-white">
+  <div class="container">
+    <h2 class="fw-bold mb-4">Get in Touch</h2>
+    <p class="mb-4">We’d love to hear about your project. Let’s build something great together.</p>
+    <a href="mailto:info@mybusiness.com" class="btn btn-primary btn-lg">Contact Us</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="py-3 bg-black text-white text-center">
+  <small>© 2025 Brook Valley Farm LLC. All rights reserved.</small>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
