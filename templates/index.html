@@ -15,7 +15,7 @@
 <!-- ======================== -->
 <!-- NAVBAR -->
 <!-- ======================== -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark bg-black fixed-top">
   <div class="container">
     <a class="navbar-brand fw-bold" href="#">Trailbuilding</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -36,19 +36,17 @@
 <!-- ======================== -->
 <!-- HERO SECTION -->
 <!-- ======================== -->
-<header id="home" class="vh-100 d-flex align-items-center text-center text-white hero-section" style="background-image: url('{{ url_for('static', filename='img/hero-bg.jpg') }}');">
+<header id="home" class="vh-100 d-flex align-items-center text-center text-white hero-section" style="background-image: url('{{ url_for('static', filename='img/rainbow.jpg') }}');">
   <div class="container">
-    <h1 class="display-1 fw-bold">HIKE</h1>
-    <h1 class="display-1 fw-bold">BIKE</h1>
-    <h1 class="display-1 fw-bold">RIDE</h1>
-    <h1 class="display-5 fw-bold">on your land</h4>
+    <h1 class="display-1 fw-bold">HIKE. BIKE. RIDE.</h1>
+    <h2 class="display-5 fw-bold">On your land.</h2>
   </div>
 </header>
 
 <!-- ======================== -->
 <!-- ABOUT SECTION -->
 <!-- ======================== -->
-<section id="about" class="vh-100 d-flex align-items-center text-center text-white about-section" style="background-image: url('{{ url_for('static', filename='img/about-bg.jpg') }}');">
+<section id="about" class="vh-100 d-flex align-items-center text-end text-white about-section" style="background-image: url('{{ url_for('static', filename='img/minix.jpg') }}');">
   <div class="container">
     <h2 class="fw-bold mb-4">About Me</h2>
     <p class="lead">
@@ -60,20 +58,20 @@
 <!-- ======================== -->
 <!-- SERVICES SECTION -->
 <!-- ======================== -->
-<section id="services" class="py-5 text-center">
+<section id="services" class="py-5 bg-dark text-center text-white">
   <div class="container">
     <h2 class="fw-bold mb-5">Services</h2>
     <div class="row row-cols-1 g-5">
-      <div class="col-md-8">
-        <h5 class="fw-bold mb-3">Trail Layout</h5>
+      <div class="col-md-8 mx-auto">
+        <h5 class="fw-bold mb-3">Layout</h5>
         <p></p>
       </div>
-      <div class="col-md-8">
-        <h5 class="fw-bold mb-3">Tail Building</h5>
+      <div class="col-md-8 mx-auto">
+        <h5 class="fw-bold mb-3">Construction</h5>
         <p></p>
       </div>
-      <div class="col-md-4">
-        <h5 class="fw-bold mb-3">Trail Repairs</h5>
+      <div class="col-md-8 mx-auto">
+        <h5 class="fw-bold mb-3">Repairs</h5>
         <p></p>
       </div>
     </div>
@@ -83,7 +81,7 @@
 <!-- ======================== -->
 <!-- PROJECTS SECTION -->
 <!-- ======================== -->
-<section id="projects" class="py-5 bg-light text-center">
+<section id="projects" class="py-5 bg-dark text-center text-white">
   <div class="container">
     <h2 class="fw-bold mb-5">Projects</h2>
     <div class="row row-cols-1 g-5">
@@ -103,7 +101,7 @@
     </div>
 
       <!-- Videos -->
-      <div class="container text-center my-5">
+      <div class="container py-5 bg-dark text-white text-center my-5">
         <div class="col-md-8 mx-auto">
           <div class="ratio ratio-16x9">
             <iframe
@@ -132,10 +130,11 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body">
-        <div id="{{ project.name }}Carousel" class="carousel slide mb-3" data-bs-ride="carousel">
+        <div id="{{ project.name }}Carousel" class="carousel slide mb-3 carousel-fade" data-bs-ride="carousel">
           <div class="carousel-inner">
+            <div class="carousel-item active"><img src="{{ url_for('static', filename=project.top_image) }}" class="d-block w-100 rounded"></div>
             {% for image in project.images %}
-            <div class="carousel-item active"><img src="{{ url_for('static', filename=image) }}" class="d-block w-100 rounded"></div>
+            <div class="carousel-item"><img src="{{ url_for('static', filename=image) }}" class="d-block w-100 rounded"></div>
             {% endfor %}
           </div>
           <button class="carousel-control-prev" type="button" data-bs-target="#{{ project.name }}Carousel" data-bs-slide="prev">
@@ -145,7 +144,6 @@
             <span class="carousel-control-next-icon"></span>
           </button>
         </div>
-        <p>{{ project.description }}</p>
       </div>
     </div>
   </div>
@@ -170,6 +168,7 @@
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/lazy-bootstrap-carousel-v5.js"></script>
 </body>
 </html>
 
