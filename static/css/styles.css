@@ -1,0 +1,196 @@
+body {
+    scroll-behavior: smooth;
+}
+
+.scroll-section {
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+
+.frosted-list-group {
+    width: 300px;
+}
+
+.frosted-caption {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    color: #fff;
+}
+
+/* Improve readability */
+.frosted-caption h2,
+.frosted-caption p {
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+@media (max-width: 768px) {
+    .frosted-caption {
+        width: 90%;
+        margin: 0 auto;
+    }
+}
+
+@supports not (backdrop-filter: blur(10px)) {
+    .frosted-caption {
+        background: rgba(0, 0, 0, 0.6);
+    }
+}
+
+
+/* Frosted glass container */
+.frosted-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 1rem;
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    max-width: 350px;
+    width: 90%;
+}
+
+.frosted-list-group .list-group-item {
+    background: rgba(255, 255, 255, 0.2);
+    /* semi-transparent */
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    /* Safari */
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.frosted-list-group .list-group-item:last-child {
+    margin-bottom: 0;
+}
+
+/* Hover effect for each item */
+.frosted-list-group .list-group-item:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-3px);
+}
+
+.frosted-list-group .list-group-item a {
+    color: #fff !important;
+    text-decoration: none;
+}
+
+/* Frosted glass button */
+.frosted-btn {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    /* Safari */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 0.5rem;
+    color: #fff;
+    padding: 0.6rem 1.5rem;
+    font-size: 1.5rem;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.frosted-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+    color: #fff;
+}
+
+/* Frosted glass modal */
+.modal-content {
+    background: rgba(255, 255, 255, 0.2);
+    /* semi-transparent */
+    backdrop-filter: blur(3px);
+    /* blur effect */
+    -webkit-backdrop-filter: blur(3px);
+    /* Safari support */
+    border-radius: 1rem;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.modal-header,
+.modal-body,
+.modal-footer {
+    border: none;
+    /* remove default borders */
+}
+
+.modal-title {
+    color: #fff;
+}
+
+.btn-close {
+    filter: invert(1);
+    /* make close button visible on dark background */
+}
+
+.container a {
+    color: #fff !important;
+    text-decoration: none;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: 60px;
+    height: 60px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    opacity: 1;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    background: rgba(255, 255, 255, 0.35);
+    transform: translateY(-50%) scale(1.05);
+}
+
+/* Make arrows white */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    filter: invert(0);
+}
+
+/* Control modal height */
+#galleryModal .modal-dialog {
+    max-width: 100vw;
+}
+
+#galleryModal .modal-content {
+    height: 100vh;
+}
+
+/* Make carousel fill modal */
+#galleryModal .modal-body,
+#galleryModal .carousel,
+#galleryModal .carousel-inner,
+#galleryModal .carousel-item,
+#galleryModal .carousel-img {
+    height: 90%;
+}
+
+/* Image scaling */
+.carousel-img {
+    object-fit: cover;
+}
+
+#galleryModal .modal-body {
+    overflow: hidden;
+}

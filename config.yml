@@ -1,0 +1,36 @@
+home:
+  image: static/img/home.jpg
+gallery:
+  justify_topics: center
+  image: static/img/gallery.jpg
+  paths: [static/img/gallery,]
+  images: []
+contact:
+  justify_topics: end
+  image: static/img/contact.jpg
+sections:
+- name: Services
+  justify_topics: start
+  image: static/img/services.jpg
+  tag: services
+  topics:
+  - name: Trail Construction
+    path: static/img/services/construction
+  - name: Trail Consulting
+    path: static/img/services/consulting
+  - name: Trail Repairs
+    path: static/img/services/repairs
+  - name: Small Projects
+    path: static/img/services/projects
+- name: About Me
+  justify_topics: end
+  image: static/img/abouts.jpg
+  tag: abouts
+  topics:
+  - name: Background
+    path: static/img/abouts/background
+  - name: Experience
+    path: static/img/abouts/experience
+  - name: Tools
+    path: static/img/abouts/tools
+
