@@ -10,18 +10,6 @@ home: # Home section with background images.
         <h2 class="display-5 fw-bold">On your land.</h2>
   image: static/img/home.jpg
   image_mobile: static/img/home.jpg
-# Gallery section, app.py will append all images found in the paths list in addition
-# to all images from sections below. Note that gallery images do not have captions.
-gallery:
-  justify_topics: center
-  image: static/img/gallery.jpg
-  image_mobile: static/img/gallery.jpg
-  paths: [static/img/gallery,]
-  images: []
-contact: # Contact section, may require updating index.html and app.py for your application.
-  justify_topics: end
-  image: static/img/contact.jpg
-  image_mobile: static/img/contact.jpg
 sections: # List of sections along with background images.
 - name: Services # Name of section displayed in a list box that scrolls over bg image.
   justify_topics: start # Position of list box.
@@ -52,4 +40,16 @@ sections: # List of sections along with background images.
     path: static/img/abouts/experience
   - name: Tools
     path: static/img/abouts/tools
+# Gallery section, app.py will append all images found in the paths listed in addition
+# to all images from sections above. Note that gallery images do not have captions.
+gallery:
+  justify_topics: center
+  image: static/img/gallery.jpg
+  image_mobile: static/img/gallery.jpg
+  paths: [static/img/gallery,]
+  images: []
+contact: # Contact section, may require updating index.html and app.py for your application.
+  justify_topics: end
+  image: static/img/contact.jpg
+  image_mobile: static/img/contact.jpg
 ```
