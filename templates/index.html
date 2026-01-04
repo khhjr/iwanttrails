@@ -24,6 +24,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
                     <li class="nav-item"><a class="nav-link" href="#abouts">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal"
@@ -35,11 +36,74 @@
         </div>
     </nav>
 
+    <style>
+        .fixed-bg {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        /* visible background */
+        .fixed-bg.active {
+            opacity: 1;
+        }
+
+        /* scrolling sections */
+        .fixed-section {
+            min-height: 100dvh;
+            position: relative;
+        }
+
+        /* ---------- RESPONSIVE IMAGES ---------- */
+
+        /* mobile-first */
+        .responsive-bg {
+            background-image: var(--bg-mobile);
+        }
+
+        /* md ≥ 768px */
+        @media (min-width: 768px) {
+            .responsive-bg {
+                background-image: var(--bg-desktop);
+            }
+        }
+    </style>
+
+    <!-- Fixed background layers -->
+    <div class="fixed-bg active responsive-bg" style="
+       --bg-mobile: url('{{ config.home.image_mobile }}');
+       --bg-desktop: url('{{ config.home.image }}');
+     ">
+    </div>
+    {% for section in config.sections %}
+    <div class="fixed-bg responsive-bg" style="
+       --bg-mobile: url('{{ section.image_mobile }}');
+       --bg-desktop: url('{{ section.image }}');
+     ">
+    </div>
+    {% endfor %}
+    <div class="fixed-bg responsive-bg" style="
+       --bg-mobile: url('{{ config.gallery.image_mobile }}');
+       --bg-desktop: url('{{ config.gallery.image }}');
+     ">
+    </div>
+    <div class="fixed-bg responsive-bg" style="
+       --bg-mobile: url('{{ config.contact.image_mobile }}');
+       --bg-desktop: url('{{ config.contact.image }}');
+     ">
+    </div>
+
+
     <!-- ======================== -->
     <!-- HOME SECTION             -->
     <!-- ======================== -->
-    <header id="home" class="vh-100 d-flex align-items-center text-center text-white scroll-section"
-        style="background-image: url('{{ config.home.image }}');">
+    <header id="home" class="fixed-section min-vh-100 d-flex align-items-center text-center text-white">
         <div class="container">
             <h1 class="display-1 fw-bold">HIKE. BIKE. RIDE.</h1>
             <h2 class="display-5 fw-bold">On your land.</h2>
@@ -51,15 +115,18 @@
     <!-- CONFIG SECTIONS          -->
     <!-- ======================== -->
     {% for section in config.sections %}
-    <section id="{{ section.tag }}" class="vh-100 d-flex align-items-center text-white scroll-section"
-        style="background-image: url('{{ section.image }}');">
+    <section id="{{ section.tag }}" class="fixed-section min-vh-100 d-flex align-items-center text-white">
         <div class="container d-flex justify-content-{{ section.justify_topics }}">
             <div class="frosted-container">
                 <h1 class="fw-bold mb-4">{{ section.name }}</h1>
+
                 {% for topic in section.topics %}
                 <ul class="list-group frosted-list-group mb-3">
-                    <li class="list-group-item"><a href="#" data-bs-toggle="modal"
-                            data-bs-target="#{{ topic.tag }}Modal">{{ topic.name }}</a></li>
+                    <li class="list-group-item">
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#{{ topic.tag }}Modal">
+                            {{ topic.name }}
+                        </a>
+                    </li>
                 </ul>
                 {% endfor %}
             </div>
@@ -112,8 +179,7 @@
     <!-- ======================== -->
     <!-- GALLERY SECTION          -->
     <!-- ======================== -->
-    <section id="gallery" class="vh-100 d-flex align-items-center text-white scroll-section"
-        style="background-image: url('{{ config.gallery.image }}');">
+    <section id="gallery" class="fixed-section min-vh-100 d-flex align-items-center text-white">
         <div class="container d-flex justify-content-{{ config.gallery.justify_topics }}">
             <div class="frosted-container">
                 <h1 class="fw-bold mb-4"><a href="#" data-bs-toggle="modal" data-bs-target="#galleryModal">Gallery</a>
@@ -124,8 +190,7 @@
     </section>
 
     <!-- Modal with carousel -->
-    <div class="modal fade" id="galleryModal" tabindex="-1" aria-labelledby="galleryLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="galleryModal" tabindex="-1" aria-labelledby="galleryLabel" aria-hidden="true">
         <div class="modal-dialog modal-fullscreen modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -159,8 +224,7 @@
     <!-- ======================== -->
     <!-- CONTACT SECTION          -->
     <!-- ======================== -->
-    <section id="contact" class="vh-100 d-flex align-items-center text-white scroll-section"
-        style="background-image: url('{{ config.contact.image }}');">
+    <section id="contact" class="fixed-section min-vh-100 d-flex align-items-center text-white">
         <div class="container d-flex justify-content-{{ config.contact.justify_topics }}">
             <div class="frosted-container">
                 <h1 class="fw-bold mb-4"><a href="#" data-bs-toggle="modal" data-bs-target="#contactModal">Contact</a>
@@ -218,6 +282,25 @@
     </div>
 
     <script>
+        const sections = document.querySelectorAll(".fixed-section");
+        const backgrounds = document.querySelectorAll(".fixed-bg");
+
+        const observer = new IntersectionObserver(
+            entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const index = [...sections].indexOf(entry.target);
+
+                        backgrounds.forEach(bg => bg.classList.remove("active"));
+                        backgrounds[index]?.classList.add("active");
+                    }
+                });
+            },
+            { threshold: 0.6 }
+        );
+
+        sections.forEach(section => observer.observe(section));
+
         document.getElementById("contactForm").addEventListener("submit", function (e) {
             e.preventDefault();
 

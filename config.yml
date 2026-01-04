@@ -1,17 +1,21 @@
 home:
   image: static/img/home.jpg
+  image_mobile: static/img/home.jpg
 gallery:
   justify_topics: center
   image: static/img/gallery.jpg
+  image_mobile: static/img/gallery.jpg
   paths: [static/img/gallery,]
   images: []
 contact:
   justify_topics: end
   image: static/img/contact.jpg
+  image_mobile: static/img/contact.jpg
 sections:
 - name: Services
   justify_topics: start
   image: static/img/services.jpg
+  image_mobile: static/img/services.jpg
   tag: services
   topics:
   - name: Trail Construction
@@ -25,6 +29,7 @@ sections:
 - name: About Me
   justify_topics: end
   image: static/img/abouts.jpg
+  image_mobile: static/img/abouts.jpg
   tag: abouts
   topics:
   - name: Background
