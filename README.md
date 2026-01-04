@@ -1,3 +1,10 @@
+# YAML driven portfolio using python flask and bootstrap
+
+This project supports creating a web based portfolio by simply updating a yaml file.
+
+Below is a sample yaml.
+
+```yaml
 home: # Home section with background images.
   text: <h1 class="display-1 fw-bold">HIKE. BIKE. RIDE.</h1>
         <h2 class="display-5 fw-bold">On your land.</h2>
@@ -45,4 +52,4 @@ sections: # List of sections along with background images.
     path: static/img/abouts/experience
   - name: Tools
     path: static/img/abouts/tools
-
+```
