@@ -17,6 +17,7 @@ home: # Home section with background images.
   image_mobile: static/img/home.jpg
 sections: # List of sections along with background images.
 - name: Services # Name of section displayed in a list box that scrolls over bg image.
+  href: services # Must match NAVBAR href.
   justify_topics: start # Position of list box.
   image: static/img/services.jpg # Background images.
   image_mobile: static/img/services.jpg
@@ -33,6 +34,7 @@ sections: # List of sections along with background images.
   - name: Small Projects
     path: static/img/services/projects
 - name: About Me
+  href: abouts
   justify_topics: end
   image: static/img/abouts.jpg
   image_mobile: static/img/abouts.jpg

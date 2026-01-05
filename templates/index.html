@@ -114,7 +114,7 @@
     <!-- CONFIG SECTIONS          -->
     <!-- ======================== -->
     {% for section in config.sections %}
-    <section id="{{ section.tag }}" class="fixed-section min-vh-100 d-flex align-items-center text-white">
+    <section id="{{ section.href }}" class="fixed-section min-vh-100 d-flex align-items-center text-white">
         <div class="container d-flex justify-content-{{ section.justify_topics }}">
             <div class="frosted-container">
                 <h1 class="fw-bold mb-4">{{ section.name }}</h1>
