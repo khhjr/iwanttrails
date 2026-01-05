@@ -2,6 +2,11 @@
 
 This project supports creating a web based portfolio by simply updating a yaml file.
 
+index.html navigation bar currently is hardcoded and needs to be updated depending
+on the yaml config.
+
+contact section needs to be updated depending on desired response.
+
 Below is a sample yaml.
 
 ```yaml
@@ -15,7 +20,6 @@ sections: # List of sections along with background images.
   justify_topics: start # Position of list box.
   image: static/img/services.jpg # Background images.
   image_mobile: static/img/services.jpg
-  tag: services # Used within index.html, must not contain spaces.
   # Each section has a list of topics with associated directories.
   # Within each directory can be multiple images and associated captions.
   # e.g., image1.jpg and image1.txt, alpha-numeric ordered.
@@ -32,7 +36,6 @@ sections: # List of sections along with background images.
   justify_topics: end
   image: static/img/abouts.jpg
   image_mobile: static/img/abouts.jpg
-  tag: abouts
   topics:
   - name: Background
     path: static/img/abouts/background

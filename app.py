@@ -24,21 +24,18 @@ for section in config["sections"]:
             if fname.lower().endswith("jpg") or fname.lower().endswith("jpeg"):
                 image_path = os.path.join(topic["path"], fname)
                 txt = image_path.split(".")[0] + ".txt"
-                desc = fname
+                desc = ""
+                if debug:
+                    desc = fname
                 if os.path.exists(txt):
                     with open(txt, "r") as f:
                         desc = f.read()
                 images.append({"path": image_path, "desc": desc})
                 config["gallery"]["images"].append(image_path)
-        top_image = ""
-        if images:
-            top_image = images.pop(0)
         topic.setdefault("tag", topic["path"].split(os.sep)[-1])
-        topic.setdefault("top_image", top_image)
         topic.setdefault("images", images)
         if debug:
             print(topic)
-config["gallery"]["top_image"] = config["gallery"]["images"].pop(0)
 if debug:
     print(config)
 
