@@ -57,9 +57,6 @@ debug(config)
 def index():
     return render_template('index.html', config=config)
 
-def is_valid_email(email):
-    return "@" in parseaddr(email)[1]
-
 @app.route("/contact", methods=["POST"])
 def contact():
     name = request.form.get("name")
@@ -67,12 +64,10 @@ def contact():
     phone = request.form.get("phone")
     message = request.form.get("message")
 
-    # Example: print or save data
     with open("forms", "a") as f:
         f.write(f"{name}\n{email}\n{phone}\n{message}\n----\n")
 
     return {"status": "success"}
-
 
 
 if __name__ == '__main__':

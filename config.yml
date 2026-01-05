@@ -29,6 +29,8 @@ sections: # List of sections along with background images.
   image: static/img/abouts.jpg
   image_mobile: static/img/abouts.jpg
   topics:
+  - name: Areas Served
+    path: static/img/abouts/areas
   - name: Background
     path: static/img/abouts/background
   - name: Experience
