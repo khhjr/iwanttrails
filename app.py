@@ -1,7 +1,16 @@
-import os, yaml
+import os, random, yaml
 from flask import Flask, render_template, request, redirect, url_for, flash
 
+
 debug = True
+def debug(d):
+    if debug:
+        print(d)
+
+
+def is_image(i):
+    return i.lower().endswith("jpg") or i.lower().endswith("jpeg")
+
 
 app = Flask(__name__)
 app.secret_key = "change_this_secret_key"
@@ -19,9 +28,8 @@ for section in config["sections"]:
             continue
         images = []
         for fname in os.listdir(topic["path"]):
-            if debug:
-                print(fname)
-            if fname.lower().endswith("jpg") or fname.lower().endswith("jpeg"):
+            debug(fname)
+            if is_image(fname):
                 image_path = os.path.join(topic["path"], fname)
                 txt = image_path.split(".")[0] + ".txt"
                 desc = ""
@@ -34,10 +42,16 @@ for section in config["sections"]:
                 config["gallery"]["images"].append(image_path)
         topic.setdefault("tag", topic["path"].split(os.sep)[-1])
         topic.setdefault("images", images)
-        if debug:
-            print(topic)
-if debug:
-    print(config)
+        debug(topic)
+
+for path in config["gallery"]["paths"]:
+    for fname in os.listdir(path):
+        debug(fname)
+        if is_image(fname):
+            config["gallery"]["images"].append(os.path.join(path, fname))
+random.shuffle(config["gallery"]["images"])
+
+debug(config)
 
 @app.route("/")
 def index():

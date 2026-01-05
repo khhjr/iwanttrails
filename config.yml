@@ -1,3 +1,5 @@
+navbar:
+  title: iwanttrails.com
 home: # Home section with background images.
   text: <h1 class="display-1 fw-bold">HIKE. BIKE. RIDE.</h1>
         <h2 class="display-5 fw-bold">On your land.</h2>
