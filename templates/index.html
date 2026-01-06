@@ -89,11 +89,6 @@
     </div>
     {% endfor %}
     <div class="fixed-bg responsive-bg" style="
-       --bg-mobile: url('{{ config.gallery.image_mobile }}');
-       --bg-desktop: url('{{ config.gallery.image }}');
-     ">
-    </div>
-    <div class="fixed-bg responsive-bg" style="
        --bg-mobile: url('{{ config.contact.image_mobile }}');
        --bg-desktop: url('{{ config.contact.image }}');
      ">
@@ -111,14 +106,14 @@
 
 
     <!-- ======================== -->
-    <!-- CONFIG SECTIONS          -->
+    <!-- YAML SECTIONS          -->
     <!-- ======================== -->
     {% for section in config.sections %}
     <section id="{{ section.href }}" class="fixed-section min-vh-100 d-flex align-items-center text-white">
         <div class="container d-flex justify-content-{{ section.justify_topics }}">
             <div class="frosted-container">
+                {% if section.name != "Gallery" %}
                 <h1 class="fw-bold mb-4">{{ section.name }}</h1>
-
                 {% for topic in section.topics %}
                 <ul class="list-group frosted-list-group mb-3">
                     <li class="list-group-item">
@@ -128,6 +123,13 @@
                     </li>
                 </ul>
                 {% endfor %}
+                {% else %}
+                {% for topic in section.topics %}
+                <h1><a href="#" data-bs-toggle="modal" data-bs-target="#{{ topic.tag }}Modal">
+                        {{ topic.name }}
+                </h1></a>
+                {% endfor %}
+                {% endif %}
             </div>
         </div>
     </section>
@@ -171,50 +173,6 @@
     </div>
     {% endfor %}
     {% endfor %}
-
-    <!-- ======================== -->
-    <!-- GALLERY SECTION          -->
-    <!-- ======================== -->
-    <section id="gallery" class="fixed-section min-vh-100 d-flex align-items-center text-white">
-        <div class="container d-flex justify-content-{{ config.gallery.justify_topics }}">
-            <div class="frosted-container">
-                <h1 class="fw-bold mb-4"><a href="#" data-bs-toggle="modal" data-bs-target="#galleryModal">Gallery</a>
-                </h1>
-            </div>
-        </div>
-        </div>
-    </section>
-
-    <!-- Modal with carousel -->
-    <div class="modal fade" id="galleryModal" tabindex="-1" aria-labelledby="galleryLabel" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="galleryLabel">Gallery</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <div id="galleryCarousel" class="carousel slide mb-3 carousel-fade" data-bs-ride="carousel">
-                        <div class="carousel-inner">
-                            {% for image in config.gallery.images %}
-                            <div class="carousel-item {% if loop.first %} active {% endif %}">
-                                <img src="{{ image }}" class="d-block w-100 rounded">
-                            </div>
-                            {% endfor %}
-                            <button class="carousel-control-prev" type="button" data-bs-target="#galleryCarousel"
-                                data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon"></span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#galleryCarousel"
-                                data-bs-slide="next">
-                                <span class="carousel-control-next-icon"></span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- ======================== -->
     <!-- CONTACT SECTION          -->

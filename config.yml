@@ -1,6 +1,7 @@
 navbar:
   title: iwanttrails.com
 home: # Home section with background images.
+  href: home
   text: <h1 class="display-1 fw-bold">HIKE. BIKE. RIDE.</h1>
         <h2 class="display-5 fw-bold">On your land.</h2>
   image: static/img/home.jpg
@@ -23,23 +24,24 @@ sections: # List of sections along with background images.
     path: static/img/services/repairs
   - name: Small Projects
     path: static/img/services/projects
+  - name: Areas Served
+    path: static/img/abouts/areas
 - name: About Me
   href: abouts
   justify_topics: end
   image: static/img/abouts.jpg
   image_mobile: static/img/abouts.jpg
   topics:
-  - name: Areas Served
-    path: static/img/abouts/areas
   - name: Background
     path: static/img/abouts/background
   - name: Experience
     path: static/img/abouts/experience
   - name: Tools
     path: static/img/abouts/tools
-# Gallery section, app.py will append all images found in the paths list in addition
-# to all images from sections above. Note that gallery images do not have captions.
-gallery:
+  - name: Areas Served
+    path: static/img/abouts/areas
+- name: Gallery
+  href: gallery
   justify_topics: center
   image: static/img/gallery.jpg
   image_mobile: static/img/gallery.jpg

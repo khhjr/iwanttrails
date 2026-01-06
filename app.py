@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 
 
 debug = True
-def debug(d):
+def log(d):
     if debug:
         print(d)
 
@@ -12,14 +12,27 @@ def is_image(i):
     return i.lower().endswith("jpg") or i.lower().endswith("jpeg")
 
 
-app = Flask(__name__)
-app.secret_key = "change_this_secret_key"
-
-with open("config.yml", "r") as f:
+home = os.path.dirname(__file__)
+yaml_file = os.path.join(home, "config.yml")
+with open(yaml_file, "r") as f:
     config = yaml.load(f.read(), Loader=yaml.Loader)
 
+secrets = {"flask_key": "this is the flask secret key"}
+secrets_file = os.path.join(".secrets")
+if os.path.exists(secrets_file):
+    with open(secrets_file, "r") as f:
+        secrets = yaml.load(f.read(), Loader=yaml.Loader)
+
+
+app = Flask(__name__)
+app.secret_key = secrets["flask_key"]
+
 sections = []
+gallery_images = []
 for section in config["sections"]:
+    if section["name"] == "Gallery":
+        gallery = section
+        continue
     tmp = []
     if not section["topics"]:
         continue
@@ -28,7 +41,7 @@ for section in config["sections"]:
             continue
         images = []
         for fname in os.listdir(topic["path"]):
-            debug(fname)
+            log(fname)
             if is_image(fname):
                 image_path = os.path.join(topic["path"], fname)
                 txt = image_path.split(".")[0] + ".txt"
@@ -39,19 +52,23 @@ for section in config["sections"]:
                     with open(txt, "r") as f:
                         desc = f.read()
                 images.append({"path": image_path, "desc": desc})
-                config["gallery"]["images"].append(image_path)
+                ign = image_path.split(".")[0] + ".ign"
+                if not os.path.exists(ign):
+                    gallery_images.append({"path": image_path, "desc": ""})
         topic.setdefault("tag", topic["path"].split(os.sep)[-1])
         topic.setdefault("images", images)
-        debug(topic)
+        log(topic)
 
-for path in config["gallery"]["paths"]:
+for path in gallery["paths"]:
     for fname in os.listdir(path):
-        debug(fname)
+        log(fname)
         if is_image(fname):
-            config["gallery"]["images"].append(os.path.join(path, fname))
-random.shuffle(config["gallery"]["images"])
+            image_path = os.path.join(path, fname)
+            gallery_images.append({"path": image_path, "desc": ""})
+random.shuffle(gallery_images)
+gallery.setdefault("topics", [{"name": "Gallery", "tag": "gallery", "images": gallery_images}])
 
-debug(config)
+log(config)
 
 @app.route("/")
 def index():
