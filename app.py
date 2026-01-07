@@ -1,8 +1,9 @@
-import os, random, yaml, datetime
-from flask import Flask, render_template, request, redirect, url_for, flash
+import os, random, yaml
+from datetime import datetime, timezone
+from flask import Flask, render_template, request
 
 
-debug = True
+debug = os.getenv("WEB_DEBUG")
 def log(d):
     if debug:
         print(d)
@@ -23,7 +24,7 @@ yaml_file = os.path.join(home, "config.yml")
 with open(yaml_file, "r") as f:
     config = yaml.load(f.read(), Loader=yaml.Loader)
 flask_key = os.getenv("FLASK_KEY", "this is the flask key")
-check_password = os.getenv("CHECK_PASSWORD", "")
+messages_password = os.getenv("MESSAGES_PASSWORD", "")
 
 
 app = Flask(__name__)
@@ -88,21 +89,20 @@ def contact():
     email = request.form.get("email")
     phone = request.form.get("phone")
     message = request.form.get("message")
-    ts = datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%S')
-    write_forms(f"\n----\n{ts}\n{name}\n{email}\n{phone}\n{message}\n----\n")
+    ts = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%S')
+    write_forms(f"\nmessage\n{ts}\n{name}\n{email}\n{phone}\n{message}\n----\n")
     return {"status": "success"}
 
-@app.route("/check_messages")
-def check_messages():
+@app.route("/get_messages")
+def get_messages():
     password = request.args.get("password")
-
-    ts = datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%S')
-    write_forms(f"\n++++\n{ts}\n{password}\n\+++++\n")
-    if check_password and (password == check_password):
+    ts = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%S')
+    write_forms(f"\nget_message\n{ts}\n{password}\n++++\n")
+    if messages_password and (password == messages_password):
         forms = os.path.join(home, "forms")
         with open(forms, "r") as f:
             data = f.read().splitlines()
-        return render_template("check_messages.html", data=data)
+        return render_template("get_messages.html", data=data)
     else:
         return "Access denied", 403
 
