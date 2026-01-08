@@ -24,11 +24,12 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
                     <li class="nav-item"><a class="nav-link" href="#abouts">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal"
                             data-bs-target="#galleryModal">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal"
+                            data-bs-target="#videosModal">Videos</a></li>
                     <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal"
                             data-bs-target="#contactModal">Contact</a></li>
                 </ul>
@@ -112,7 +113,7 @@
     <section id="{{ section.href }}" class="fixed-section min-vh-100 d-flex align-items-center text-white">
         <div class="container d-flex justify-content-{{ section.justify_topics }}">
             <div class="frosted-container">
-                {% if section.name != "Gallery" %}
+                {% if section.topics|length > 1 %}
                 <h1 class="fw-bold mb-4">{{ section.name }}</h1>
                 {% for topic in section.topics %}
                 <ul class="list-group frosted-list-group mb-3">
@@ -145,7 +146,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <div id="{{ topic.tag }}Carousel" class="carousel slide mb-3 carousel-fade" data-bs-ride="carousel">
+                    <div id="{{ topic.tag }}Carousel" class="carousel slide mb-3 carousel-fade" data-bs-interval="false">
                         <div class="carousel-inner">
                             {% for image in topic.images %}
                             <div class="carousel-item {% if loop.first %} active {% endif %}">
@@ -157,15 +158,28 @@
                                 {% endif %}
                             </div>
                             {% endfor %}
-                            <button class="carousel-control-prev" type="button"
-                                data-bs-target="#{{ topic.tag }}Carousel" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon"></span>
-                            </button>
-                            <button class="carousel-control-next" type="button"
-                                data-bs-target="#{{ topic.tag }}Carousel" data-bs-slide="next">
-                                <span class="carousel-control-next-icon"></span>
-                            </button>
+                            {% for video in topic.videos %}
+                            <div class="carousel-item {% if loop.first %} active {% endif %}">
+                                <div class="ratio ratio-16x9">
+                                    <iframe data-video-id="{{ video.link }}" allow="autoplay; fullscreen"
+                                        allowfullscreen></iframe>
+                                </div>
+                                {% if video.desc is defined and video.desc|length > 0 %}
+                                <div class="carousel-caption-static mt-3 text-center frosted-caption">
+                                    <p class="mb-0">{{ video.desc }}</p>
+                                </div>
+                                {% endif %}
+                            </div>
+                            {% endfor %}
                         </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#{{ topic.tag }}Carousel"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#{{ topic.tag }}Carousel"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -298,6 +312,38 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/lazy-bootstrap-carousel-v5.js"></script>
+    <script>
+        document.querySelectorAll('.modal').forEach(modal => {
+
+            modal.addEventListener('shown.bs.modal', () => {
+                const iframe = modal.querySelector('.carousel-item.active iframe[data-video-id]')
+                if (iframe) {
+                    iframe.src = `https://www.youtube.com/embed/${iframe.dataset.videoId}?autoplay=0`
+                }
+            })
+
+            modal.addEventListener('hidden.bs.modal', () => {
+                modal.querySelectorAll('iframe').forEach(iframe => iframe.src = '')
+            })
+
+            modal.querySelectorAll('.carousel').forEach(carousel => {
+
+                carousel.addEventListener('slide.bs.carousel', () => {
+                    carousel.querySelectorAll('iframe').forEach(iframe => iframe.src = '')
+                })
+
+                carousel.addEventListener('slid.bs.carousel', () => {
+                    const iframe = carousel.querySelector('.carousel-item.active iframe[data-video-id]')
+                    if (iframe) {
+                        iframe.src = `https://www.youtube.com/embed/${iframe.dataset.videoId}?autoplay=0`
+                    }
+                })
+
+            })
+        })
+    </script>
+
+
 </body>
 
 </html>

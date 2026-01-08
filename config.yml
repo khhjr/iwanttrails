@@ -38,15 +38,20 @@ sections: # List of sections along with background images.
     path: static/img/abouts/experience
   - name: Tools
     path: static/img/abouts/tools
-  - name: Areas Served
-    path: static/img/abouts/areas
 - name: Gallery
   href: gallery
   justify_topics: center
   image: static/img/gallery.jpg
   image_mobile: static/img/gallery.jpg
   paths: [static/img/gallery,]
-  images: []
+  images: [] # Will be filled by app.py.
+- name: Videos
+  href: videos
+  justify_topics: begin
+  image: static/img/videos.jpg
+  image_mobile: static/img/videos.jpg
+  path: static/img/videos # list of youtube links and descriptions.
+  videos: [] # Will be filled by app.py.
 contact: # Contact section, may require updating index.html and app.py for your application.
   justify_topics: end
   image: static/img/contact.jpg

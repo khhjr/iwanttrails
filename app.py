@@ -36,6 +36,9 @@ for section in config["sections"]:
     if section["name"] == "Gallery":
         gallery = section
         continue
+    if section["name"] == "Videos":
+        videos = section
+        continue
     tmp = []
     if not section["topics"]:
         continue
@@ -76,6 +79,11 @@ for path in gallery["paths"]:
             gallery_images.append({"path": image_path, "desc": desc})
 random.shuffle(gallery_images)
 gallery.setdefault("topics", [{"name": "Gallery", "tag": "gallery", "images": gallery_images}])
+
+with open(videos["path"], "r") as f:
+    videos_config = yaml.load(f.read(), Loader=yaml.Loader)
+log(videos_config)
+videos.setdefault("topics", [{"name": "Videos", "tag": "videos", "videos": videos_config}])
 
 log(config)
 
