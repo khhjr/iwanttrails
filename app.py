@@ -65,7 +65,7 @@ for section in config["sections"]:
                         desc = fname
                     gallery_images.append({"path": image_path, "desc": desc})
         topic.setdefault("tag", topic["path"].split(os.sep)[-1])
-        topic.setdefault("images", images)
+        topic.setdefault("images", sorted(images, key=lambda x: x["path"]))
         log(topic)
 
 for path in gallery["paths"]:
