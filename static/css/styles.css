@@ -168,29 +168,7 @@ body {
     filter: invert(0);
 }
 
-/* Control modal height */
-#galleryModal .modal-dialog {
-    max-width: 100vw;
-}
-
-#galleryModal .modal-content {
-    height: 100vh;
-}
-
-/* Make carousel fill modal */
-#galleryModal .modal-body,
-#galleryModal .carousel,
-#galleryModal .carousel-inner,
-#galleryModal .carousel-item,
-#galleryModal .carousel-img {
-    height: 90%;
-}
-
 /* Image scaling */
 .carousel-img {
     object-fit: cover;
-}
-
-#galleryModal .modal-body {
-    overflow: hidden;
 }

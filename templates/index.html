@@ -74,6 +74,16 @@
                 background-image: var(--bg-desktop);
             }
         }
+
+        .modal-padded {
+            padding: 2rem;
+        }
+
+        @media (max-width: 576px) {
+            .modal-padded {
+                padding: 1rem;
+            }
+        }
     </style>
 
     <!-- Fixed background layers -->
@@ -139,7 +149,7 @@
     {% for topic in section.topics %}
     <div class="modal fade" id="{{ topic.tag }}Modal" tabindex="-1" aria-labelledby="{{ topic.tag }}Label"
         aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen modal-dialog-centered">
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="{{ topic.tag }}Label">{{ topic.name }}</h5>
