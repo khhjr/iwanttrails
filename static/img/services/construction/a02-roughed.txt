@@ -1,0 +1,1 @@
+Example of segment with minimal cleanup, including roots cleared with loopers.
