@@ -1,16 +1,70 @@
-# YAML driven portfolio using python flask and bootstrap
+# YAML driven portfolio
 
 This project supports creating a web based portfolio by simply updating a yaml file.
 
-index.html navigation bar currently is hardcoded and needs to be updated depending
-on the yaml config.
+The basic layout is shown below. Section and topic attributes are defined within the yaml file.
+Images and captions are derived from directory contents specified in the yaml. Once you have
+the basic stuff working, you can simply add additional images and captions to the working
+directory and restart the web server.
 
-contact section needs to be updated depending on desired response.
+```
+NAVBAR (requires updating index.html)
 
+Home (Title) Section
+
+Section 1
+  Topic a
+     Image i with optional caption
+     Image ii with optional caption
+     Image iii with optional caption
+     ...
+  Topic b
+     Image i with caption
+     Image ii with caption
+     Image iii with caption
+     ...
+  Topic c
+     Image i with caption
+     Image ii with caption
+     Image iii with caption
+     ...
+
+Section 2
+  Topic a
+     Image i with caption
+     Image ii with caption
+     Image iii with caption
+     ...
+  Topic b
+     Image i with caption
+     Image ii with caption
+     Image iii with caption
+     ...
+  Topic c
+     Image i with caption
+     Image ii with caption
+     Image iii with caption
+     ...
+
+  Section N
+
+  Gallery Section
+     N images
+
+  Video Section
+     N images
+
+  Contact Section (requires editing contact.html)
+
+  Footer (requires editing index.htm)
+```
 Below is a sample yaml.
 
-```yaml
+```
+navbar:
+  title: iwanttrails.com
 home: # Home section with background images.
+  href: home
   text: <h1 class="display-1 fw-bold">HIKE. BIKE. RIDE.</h1>
         <h2 class="display-5 fw-bold">On your land.</h2>
   image: static/img/home.jpg
@@ -19,8 +73,8 @@ sections: # List of sections along with background images.
 - name: Services # Name of section displayed in a list box that scrolls over bg image.
   href: services # Must match NAVBAR href.
   justify_topics: start # Position of list box.
-  image: static/img/services.jpg # Background images.
-  image_mobile: static/img/services.jpg
+  image: static/img/services.jpg # Desktop bg image.
+  image_mobile: static/img/services.jpg # Mobile bg image.
   # Each section has a list of topics with associated directories.
   # Within each directory can be multiple images and associated captions.
   # e.g., image1.jpg and image1.txt, alpha-numeric ordered.
@@ -33,6 +87,8 @@ sections: # List of sections along with background images.
     path: static/img/services/repairs
   - name: Small Projects
     path: static/img/services/projects
+  - name: Areas Served
+    path: static/img/abouts/areas
 - name: About Me
   href: abouts
   justify_topics: end
@@ -45,16 +101,21 @@ sections: # List of sections along with background images.
     path: static/img/abouts/experience
   - name: Tools
     path: static/img/abouts/tools
-# Gallery section, app.py will append all images found in the paths listed in addition
-# to all images from sections above. Note that gallery images do not have captions.
-gallery:
+- name: Gallery
+  href: gallery
   justify_topics: center
   image: static/img/gallery.jpg
   image_mobile: static/img/gallery.jpg
   paths: [static/img/gallery,]
-  images: []
+  images: [] # Will be filled by app.py.
+- name: Videos
+  href: videos
+  justify_topics: begin
+  image: static/img/videos.jpg
+  image_mobile: static/img/videos.jpg
+  path: static/img/videos # list of youtube links and descriptions.
+  videos: [] # Will be filled by app.py.
 contact: # Contact section, may require updating index.html and app.py for your application.
   justify_topics: end
   image: static/img/contact.jpg
   image_mobile: static/img/contact.jpg
-```

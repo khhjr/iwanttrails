@@ -52,7 +52,7 @@ document.querySelectorAll('.modal').forEach(modal => {
         )
         if (iframe) {
             iframe.src =
-                `https://www.youtube.com/embed/${iframe.dataset.videoId}?autoplay=1`
+                `https://www.youtube.com/embed/${iframe.dataset.videoId}?autoplay=0`
         }
     })
 
