@@ -1,0 +1,94 @@
+    <section id="contact" class="fixed-section min-vh-100 d-flex align-items-center text-white">
+        <div class="container d-flex justify-content-{{ config.contact.justify_topics }}">
+            <div class="frosted-container">
+                <h1 class="fw-bold mb-4"><a href="#" data-bs-toggle="modal" data-bs-target="#contactModal">Contact</a>
+                </h1>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <div class="modal fade" id="contactModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="contactForm">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Leave a message and I'll get in touch ASAP. Thanks.</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <!-- Success Message -->
+                        <div id="successMsg" class="alert alert-success d-none">
+                            ✅ Message sent successfully!
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Name</label>
+                            <input type="text" name="name" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" name="email" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Phone</label>
+                            <input type="phone" name="phone" class="form-control">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Message</label>
+                            <textarea name="message" class="form-control" rows="4" required></textarea>
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="frosted-btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="frosted-btn btn-primary">Send</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("contactForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const form = this;
+            const successMsg = document.getElementById("successMsg");
+
+            fetch("{{ url_for('contact') }}", {
+                method: "POST",
+                body: new FormData(form)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === "success") {
+                        successMsg.classList.remove("d-none");
+                        form.reset();
+                    }
+                })
+                .catch(() => {
+                    alert("Something went wrong. Please try again.");
+                });
+        });
+
+        const contactModal = document.getElementById("contactModal");
+        const successMsg = document.getElementById("successMsg");
+        const contactForm = document.getElementById("contactForm");
+
+        contactModal.addEventListener("show.bs.modal", () => {
+            successMsg.classList.add("d-none");
+        });
+
+        contactModal.addEventListener("hidden.bs.modal", () => {
+            contactForm.reset();
+        });
+
+    </script>
+
