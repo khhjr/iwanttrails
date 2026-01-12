@@ -115,7 +115,7 @@ sections: # List of sections along with background images.
   image_mobile: static/img/videos.jpg
   path: static/img/videos # list of youtube links and descriptions.
   videos: [] # Will be filled by app.py.
-contact: # Contact section, may require updating index.html and app.py for your application.
+contact: # Contact section, may require updating contact.html and app.py for your application.
   justify_topics: end
   image: static/img/contact.jpg
   image_mobile: static/img/contact.jpg
