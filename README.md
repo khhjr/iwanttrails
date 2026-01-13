@@ -5,58 +5,56 @@ This project supports creating a web based portfolio by simply updating a yaml f
 The basic layout is shown below. Section and topic attributes are defined within the yaml file.
 Images and captions are derived from directory contents specified in the yaml. Once you have
 the basic stuff working, you can simply add additional images and captions to the working
-directory and restart the web server.
+directory and restart the web server. This makes updating and maintaining the portfolio
+extremely easy.
 
 ```
 NAVBAR (requires updating index.html)
 
 Home (Title) Section
 
-Section 1
-  Topic a
-     Image i with optional caption
-     Image ii with optional caption
-     Image iii with optional caption
-     ...
-  Topic b
-     Image i with caption
-     Image ii with caption
-     Image iii with caption
-     ...
-  Topic c
-     Image i with caption
-     Image ii with caption
-     Image iii with caption
-     ...
+# Configurable Sections (including Gallery and Videos)
+  Section 1
+    Topic a
+       Image i with optional caption
+       Image ii with optional caption
+       Image iii with optional caption
+       ...
+    Topic b
+       Image i with caption
+       Image ii with caption
+       Image iii with caption
+       ...
+    Topic c
+       Image i with caption
+       Image ii with caption
+       Image iii with caption
+       ...
+  Section 2
+    Topic a
+       Image i with caption
+       Image ii with caption
+       Image iii with caption
+       ...
+    Topic b
+       Image i with caption
+       Image ii with caption
+       Image iii with caption
+       ...
+    Topic c
+       Image i with caption
+       Image ii with caption
+       Image iii with caption
+       ...
+    Section N
+    Gallery Section
+       N images
+    Video Section
+       N images
 
-Section 2
-  Topic a
-     Image i with caption
-     Image ii with caption
-     Image iii with caption
-     ...
-  Topic b
-     Image i with caption
-     Image ii with caption
-     Image iii with caption
-     ...
-  Topic c
-     Image i with caption
-     Image ii with caption
-     Image iii with caption
-     ...
+Contact Section (requires editing contact.html)
+Footer (requires editing index.html)
 
-  Section N
-
-  Gallery Section
-     N images
-
-  Video Section
-     N images
-
-  Contact Section (requires editing contact.html)
-
-  Footer (requires editing index.htm)
 ```
 Below is a sample yaml.
 

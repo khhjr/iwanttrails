@@ -1,12 +1,17 @@
+# Navigation bar. TODO make configurable.
 navbar:
-  title: iwanttrails.com
-home: # Home section with background images.
+  title: iwanttrails.com # Page title.
+
+# Home section with background images.
+home:
   href: home
   text: <h1 class="display-1 fw-bold">HIKE. BIKE. RIDE.</h1>
         <h2 class="display-5 fw-bold">On your land.</h2>
   image: static/img/home.jpg
   image_mobile: static/img/home.jpg
-sections: # List of sections along with background images.
+
+# List of configurable sections and background images.
+sections:
 - name: Services # Name of section displayed in a list box that scrolls over bg image.
   href: services # Must match NAVBAR href.
   justify_topics: start # Position of list box.
@@ -52,7 +57,11 @@ sections: # List of sections along with background images.
   image_mobile: static/img/videos.jpg
   path: static/img/videos # list of youtube links and descriptions.
   videos: [] # Will be filled by app.py.
-contact: # Contact section, may require updating contact.html and app.py for your application.
+
+# Contact section, may require updating contact.html and app.py for your application.
+contact:
   justify_topics: end
   image: static/img/contact.jpg
   image_mobile: static/img/contact.jpg
+
+# TODO make footer configurable.
