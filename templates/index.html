@@ -14,7 +14,7 @@
 <body>
 
     <!-- ======================== -->
-    <!-- NAVBAR -->
+    <!-- NAVBAR                   -->
     <!-- ======================== -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-black fixed-top">
         <div class="container">
@@ -37,6 +37,9 @@
         </div>
     </nav>
 
+    <!-- ======================== -->
+    <!-- BACKGROUND IMAGES        -->
+    <!-- ======================== -->
     <style>
         .fixed-bg {
             position: fixed;
@@ -117,7 +120,7 @@
 
 
     <!-- ======================== -->
-    <!-- YAML SECTIONS          -->
+    <!-- CONFIGURABLE SECTIONS    -->
     <!-- ======================== -->
     {% for section in config.sections %}
     <section id="{{ section.href }}" class="fixed-section min-vh-100 d-flex align-items-center text-white">
@@ -156,7 +159,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <div id="{{ topic.tag }}Carousel" class="carousel slide mb-3 carousel-fade"
+                    <div id="{{ topic.tag }}Carousel" class="carousel slide mb-3 carousel-fade carousel-dark"
                         data-bs-interval="false">
                         <div class="carousel-inner">
                             {% for image in topic.images %}
