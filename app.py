@@ -1,4 +1,4 @@
-import os, random, yaml
+import os, dotenv, random, yaml
 from datetime import datetime, timezone
 from flask import Flask, render_template, request
 
@@ -17,6 +17,9 @@ def write_forms(d):
     forms = os.path.join(home, "forms")
     with open(forms, "a") as f:
         f.write(d)
+
+
+dotenv.load_dotenv(".env")
 
 
 home = os.path.dirname(__file__)
