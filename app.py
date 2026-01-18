@@ -101,20 +101,21 @@ def contact():
     phone = request.form.get("phone")
     message = request.form.get("message")
     ts = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%S')
-    write_forms(f"\nmessage\n{ts}\n{name}\n{email}\n{phone}\n{message}\n----\n")
+    write_forms(f"\n{ts}\nmessage\n{name}\n{email}\n{phone}\n{message}\n----\n")
     return {"status": "success"}
 
 @app.route("/get_messages")
 def get_messages():
     password = request.args.get("password")
     ts = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%S')
-    write_forms(f"\nget_message\n{ts}\n{password}\n++++\n")
     if messages_password and (password == messages_password):
+        write_forms(f"\n{ts}\nget messages allowed\n++++\n")
         forms = os.path.join(home, "forms")
         with open(forms, "r") as f:
             data = f.read().splitlines()
         return render_template("get_messages.html", data=data)
     else:
+        write_forms(f"\n{ts}\nget messages access denied\n{password}\n++++\n")
         return "Access denied", 403
 
 if __name__ == '__main__':
