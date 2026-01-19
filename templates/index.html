@@ -6,22 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>iwanttrails.com</title>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iwanttrails.com</title>
+    <!-- Meta description and keywords -->
+    <meta name="description" content="Professional trail building, mountain bike, and hiking trail
+    construction for private landowners across Western NC, including Asheville, Brevard, and Hendersonville.">
+    <meta name="keywords" content="trail building Western NC, Asheville trail construction, mountain bike trails
+    NC, hiking trail builders North Carolina, backyard trail construction, private land trail builders">
 
     <!-- DuckDuckGo REQUIRED -->
     <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-
     <!-- Standard PNG fallback -->
     <link rel="icon" type="image/png" sizes="96x96"
           href="{{ url_for('static', filename='favicon-96x96.png') }}">
-
     <!-- Apple / Safari -->
     <link rel="apple-touch-icon" sizes="180x180"
           href="{{ url_for('static', filename='apple-touch-icon.png') }}">
-
     <!-- PWA -->
     <link rel="manifest"
           href="{{ url_for('static', filename='site.webmanifest') }}">
@@ -134,7 +133,7 @@
     <!-- ======================== -->
     <header id="home" class="fixed-section min-vh-100 d-flex align-items-center text-center text-white">
         <div class="container">
-            <img src="static/img/logo3.png" class="d-block w-100 rounded">
+            <img src="static/img/iwt_logo.png" class="d-block w-100 rounded">
         </div>
     </header>
 
@@ -187,7 +186,7 @@
                                 <img src="{{ image.path }}" class="d-block w-100 rounded">
                                 {% if image.desc is defined and image.desc|length > 0 %}
                                 <div class="carousel-caption-static mt-3 text-center frosted-caption">
-                                    <p class="mb-0">{{ image.desc }}</p>
+                                    <p class="mb-0">{{ image.desc|safe }}</p>
                                 </div>
                                 {% endif %}
                             </div>
