@@ -43,7 +43,7 @@ for section in config["sections"]:
         videos = section
         continue
     tmp = []
-    if not section["topics"]:
+    if not section.get("topics"):
         continue
     for topic in section["topics"]:
         if not os.path.isdir(topic["path"]):

@@ -59,6 +59,21 @@ body {
 }
 
 /* Frosted glass container */
+.frosted-container-bullets {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 1rem;
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    max-width: 850px;
+    width: 90%;
+}
+
+/* Frosted glass container */
 .frosted-container-wide {
     display: flex;
     flex-direction: column;

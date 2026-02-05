@@ -132,7 +132,7 @@
     <!-- ======================== -->
     <header id="home" class="fixed-section min-vh-100 d-flex align-items-center text-center text-white">
         <div class="container">
-            <img src="static/img/logo_top.png" class="d-block w-100 rounded">
+            <img src="static/img/logo_bottom.png" class="d-block w-100 rounded">
         </div>
     </header>
 
@@ -143,8 +143,8 @@
     {% for section in config.sections %}
     <section id="{{ section.href }}" class="fixed-section min-vh-100 d-flex align-items-center text-white">
         <div class="container d-flex justify-content-{{ section.justify_topics }}">
-            <div class="frosted-container">
-                {% if section.topics|length > 1 %}
+                {% if section.type == 'modal' %}
+                <div class="frosted-container">
                 <h1 class="fw-bold mb-4">{{ section.name }}</h1>
                 {% for topic in section.topics %}
                 <ul class="list-group frosted-list-group mb-3">
@@ -155,18 +155,33 @@
                     </li>
                 </ul>
                 {% endfor %}
-                {% else %}
+                </div>
+                {% elif section.type == 'single' %}
+                <div class="frosted-container">
                 {% for topic in section.topics %}
                 <h1><a href="#" data-bs-toggle="modal" data-bs-target="#{{ topic.tag }}Modal">
                         {{ topic.name }}
                 </h1></a>
                 {% endfor %}
+                </div>
+                {% elif section.type == 'bullets' %}
+                <div class="frosted-container-bullets">
+                <h1>{{ section.title }}</h1>
+                <p></p>
+                <ul class="list-group">
+                {% for bullet in section.bullets %}
+                  <h2>
+                    <li> {{ bullet }} </li>
+                  </h2>
+                {% endfor %}
+                </ul>
+                </div>
                 {% endif %}
-            </div>
         </div>
     </section>
 
     <!-- Modal with carousel -->
+    {% if section.type != 'bullets' %}
     {% for topic in section.topics %}
     <div class="modal fade" id="{{ topic.tag }}Modal" tabindex="-1" aria-labelledby="{{ topic.tag }}Label"
         aria-hidden="true">
@@ -218,6 +233,7 @@
         </div>
     </div>
     {% endfor %}
+    {% endif %}
     {% endfor %}
 
     <!-- ======================== -->

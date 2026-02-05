@@ -13,7 +13,35 @@ home:
 
 # List of configurable sections and background images.
 sections:
+- name: Trail Types
+  href: trails
+  type: bullets
+  justify_topics: center
+  image: static/img/types.jpg
+  image_mobile: static/img/types.jpg
+  title: Custom trails right outside your door!
+  bullets:
+    - Hiking & walking trails
+    - Mountain bike trails & flow lines
+    - ATV / UTV routes
+    - Equestrian trails
+    - Singletrack and wide trails
+    - Switchbacks and contour trails
+- name: Benefits
+  href: benefits
+  type: bullets
+  justify_topics: center
+  image: static/img/services/construction/a01-finished.jpg
+  image_mobile: static/img/services/construction/a01-finished.jpg
+  title: Custom trails are beneficial!
+  bullets:
+    - Enjoy private outdoor recreation
+    - Increase land value and usability
+    - Provide access to remote acreage
+    - Improve physical and mental wellbeing
+    - Aid in fire prevention and control
 - name: Services # Name of section displayed in a list box that scrolls over bg image.
+  type: modal
   href: services # Must match NAVBAR href.
   justify_topics: start # Position of list box.
   image: static/img/services.jpg # Desktop bg image.
@@ -33,6 +61,7 @@ sections:
   - name: Areas Served
     path: static/img/abouts/areas
 - name: About Me
+  type: modal
   href: abouts
   justify_topics: end
   image: static/img/abouts.jpg
@@ -45,6 +74,7 @@ sections:
   - name: Tools
     path: static/img/abouts/tools
 - name: Gallery
+  type: single
   href: gallery
   justify_topics: center
   image: static/img/gallery.jpg
@@ -52,6 +82,7 @@ sections:
   paths: [static/img/gallery,]
   images: [] # Will be filled by app.py.
 - name: Videos
+  type: single
   href: videos
   justify_topics: begin
   image: static/img/videos.jpg
@@ -61,6 +92,7 @@ sections:
 
 # Contact section, may require updating contact.html and app.py for your application.
 contact:
+  type: list
   justify_topics: end
   image: static/img/contact.jpg
   image_mobile: static/img/contact.jpg
