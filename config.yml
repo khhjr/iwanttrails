@@ -19,26 +19,26 @@ sections:
   justify_topics: center
   image: static/img/types.jpg
   image_mobile: static/img/types.jpg
-  title: Custom trails right outside your door!
+  title: I buld low impact, sustainable trails tailored to your land, needs, and budget
   bullets:
-    - Hiking & walking trails
-    - Mountain bike trails & flow lines
-    - ATV / UTV routes
-    - Equestrian trails
+    - Hiking and walking trails
+    - Mountain bike trails and flow lines
     - Singletrack and wide trails
     - Switchbacks and contour trails
+    - Equestrian trails
+    - ATV / UTV routes
 - name: Benefits
   href: benefits
   type: bullets
   justify_topics: center
   image: static/img/services/construction/a01-finished.jpg
   image_mobile: static/img/services/construction/a01-finished.jpg
-  title: Custom trails are beneficial!
+  title: Easily accessible trails on your property offer numerous benefits
   bullets:
     - Enjoy private outdoor recreation
+    - Improve physical and mental wellbeing
     - Increase land value and usability
     - Provide access to remote acreage
-    - Improve physical and mental wellbeing
     - Aid in fire prevention and control
 - name: Services # Name of section displayed in a list box that scrolls over bg image.
   type: modal
