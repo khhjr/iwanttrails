@@ -15,11 +15,11 @@ home:
 sections:
 - name: Trail Types
   href: trails
-  type: bullets
+  type: bullets # Type of section, bullets or modal buttons
   justify_topics: center
   image: static/img/types.jpg
   image_mobile: static/img/types.jpg
-  title: I buld low impact, sustainable trails tailored to your land, needs, and budget
+  title: I build low impact, sustainable trails tailored to your land, needs, and budget
   bullets:
     - Hiking and walking trails
     - Mountain bike trails and flow lines
