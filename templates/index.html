@@ -44,6 +44,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#testimonials">Testimonials</a></li>
                     <li class="nav-item"><a class="nav-link" href="#abouts">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal"
                             data-bs-target="#galleryModal">Gallery</a></li>
@@ -127,12 +128,14 @@
     </div>
 
 
+    <style>.logo-image {max-width: 200; height: auto;}</style>
     <!-- ======================== -->
     <!-- HOME SECTION             -->
     <!-- ======================== -->
     <header id="home" class="fixed-section min-vh-100 d-flex align-items-center text-center text-white">
         <div class="container">
-            <img src="static/img/logo_bottom.png" class="d-block w-100 rounded">
+            <img src="static/img/logo_bottom.png" class="image-fluid w-50">
+            {{ config.home.text|safe }}
         </div>
     </header>
 
@@ -165,6 +168,17 @@
                 </h1></a>
                 {% endfor %}
                 </div>
+                {% elif section.type == 'paragraph' %}
+                <div class="frosted-container-bullets">
+                <h1>{{ section.title }}</h1>
+                <p></p>
+                <ul class="list-group list-unstyled">
+                {% for bullet in section.bullets %}
+                  <h2>
+                    <li> {{ bullet|safe }} </li>
+                  </h2>
+                {% endfor %}
+                </ul>
                 {% elif section.type == 'bullets' %}
                 <div class="frosted-container-bullets">
                 <h1>{{ section.title }}</h1>
@@ -245,8 +259,9 @@
     <!-- Footer -->
     <footer class="py-3 bg-black text-white text-center">
         <small>
+            <a href="http://iwanttrails.com">iwanttrails.com</a><br>
+            © 2026 Brook Valley Farm LLC.<br>
             <a href="https://github.com/khhjr/iwanttrails" target="_blank">YAML dirven portfolio</a><br>
-            © 2026 Brook Valley Farm LLC. All rights reserved.
         </small>
     </footer>
 
