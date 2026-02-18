@@ -7,6 +7,7 @@ home:
   href: home
   text: <h1>Your land deserves a trail worth using every day.</h1>
         <h1>Custom trail design and construction for private landowners across western North Carolina.</h1>
+        <a href="#contact" class="frosted-btn btn-lg">Get a Free Consultation</a>
   image: static/img/home.jpg
   image_mobile: static/img/home.jpg
 
@@ -68,7 +69,7 @@ sections:
   title: What clients say
   bullets:
     - <q>Kyle did an amazing job! Took me through the process step by step. The end product was an amazing trail that I use everyday</q>
-    - "- Joe from Google reviews"
+    - "⭐⭐⭐⭐⭐ - Joe from Google reviews"
 - name: About Me
   type: modal
   href: abouts
