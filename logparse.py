@@ -8,7 +8,6 @@ import datetime
 
 class AccessLogEntry(object):
 
-    # pat = r'(?P<ip>[\d\.]+).*\[(?P<utc>[\w/:]+)\s\+0000\]\s+(?P<op>.*)\s(?P<status>\d+)\s\d+\s"[^"]*"\s"(?P<agent>[^"]+)"'
     pat = r'(?P<ip>\d{1,3}(?:\.\d{1,3}){3}).*\[(?P<utc>[\w/:]+)\s\+0000\]\s+"(?P<op>[^"]+)"\s(?P<status>\d+)\s\d+\s"[^"]*"\s"(?P<agent>[^"]+)"'
     regex = re.compile(pat)
     location_tbl = {}
@@ -24,7 +23,7 @@ class AccessLogEntry(object):
 
     def __init__(self, line):
         self.log_entry = line
-        self._ipaddr = None
+        self.ipaddr = None
         self._location = None
         self.utc = self.unknown
         self.op = self.unknown
@@ -36,22 +35,16 @@ class AccessLogEntry(object):
     def url(self):
         return f"http://ip-api.com/json/{self.ipaddr}"
 
-    @property
-    def ipaddr(self):
-        return self._ipaddr
-
     def load_attrs(self):
-        if not self._ipaddr:
-            m = self.regex.search(self.log_entry)
-            if m:
-                self._ipaddr = m.group("ip")
-                self.utc = m.group("utc")
-                self.op = m.group("op")
-                self.status = m.group("status")
-                self.agent = m.group("agent")
-            else:
-                self._ipaddr = self.unknown
-        return self._ipaddr
+        m = self.regex.search(self.log_entry)
+        if m:
+            self.ipaddr = m.group("ip")
+            self.utc = m.group("utc")
+            self.op = m.group("op")
+            self.status = m.group("status")
+            self.agent = m.group("agent")
+        else:
+            self.ipaddr = self.unknown
 
     @property
     def location(self):
@@ -94,12 +87,10 @@ class AccessLogEntry(object):
 
     @property
     def est(self):
-        try:
-            utc = datetime.datetime.strptime(self.utc, "%d/%b/%Y:%H:%M:%S")
-            return (utc + datetime.timedelta(hours=-5))
-        except:
+        if self.utc == self.unknown:
             return self.unknown
-
+        utc = datetime.datetime.strptime(self.utc, "%d/%b/%Y:%H:%M:%S")
+        return (utc + datetime.timedelta(hours=-5))
 
 def main(log):
 
