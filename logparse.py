@@ -8,7 +8,8 @@ import datetime
 
 class AccessLogEntry(object):
 
-    pat = r'(?P<ip>\d{1,3}(?:\.\d{1,3}){3}).*\[(?P<utc>[\w/:]+)\s\+0000\]\s+"(?P<op>[^"]+)"\s(?P<status>\d+)\s\d+\s"[^"]*"\s"(?P<agent>[^"]+)"'
+    pat = r'(?P<ip>\d{1,3}(?:\.\d{1,3}){3}).*\[(?P<utc>[\w/:]+)\s\+0000\]\s+"(?P<op>[^"]+)"\s'
+    pat += r'(?P<status>\d+)\s(?P<size>\d+)\s"(?P<referer>[^"]*)"\s"(?P<agent>[^"]+)"'
     regex = re.compile(pat)
     location_tbl = {}
     starlink = "153.66.9"
@@ -28,6 +29,7 @@ class AccessLogEntry(object):
         self.utc = self.unknown
         self.op = self.unknown
         self.status = self.unknown
+        self.referer = self.unknown
         self.agent = self.unknown
         self.load_attrs()
 
@@ -42,6 +44,7 @@ class AccessLogEntry(object):
             self.utc = m.group("utc")
             self.op = m.group("op")
             self.status = m.group("status")
+            self.referer = m.group("referer")
             self.agent = m.group("agent")
         else:
             self.ipaddr = self.unknown
@@ -83,7 +86,7 @@ class AccessLogEntry(object):
         return success
 
     def print(self):
-            print(f"{self.est}   {self.ipaddr:<16} {self.location:<40} {self.status} {self.op:<80.79} {self.agent}")
+            print(f"{self.est}   {self.ipaddr:<16} {self.location:<40.38} {self.status:<5.3} {self.referer:<30.28} {self.op:<50.48} {self.agent:<50.50}")
 
     @property
     def est(self):
