@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 
 import re
 import sys
@@ -8,8 +9,8 @@ import datetime
 
 class AccessLogEntry(object):
 
-    pat = r'(?P<ip>\d{1,3}(?:\.\d{1,3}){3}).*\[(?P<utc>[\w/:]+)\s\+0000\]\s+"(?P<op>[^"]+)"\s'
-    pat += r'(?P<status>\d+)\s(?P<size>\d+)\s"(?P<referer>[^"]*)"\s"(?P<agent>[^"]+)"'
+    pat = r'(?P<ipaddr>\d{1,3}(?:\.\d{1,3}){3}).*\[(?P<utc>[\w/:]+)\s\+0000\]\s+"(?P<op>[^"]+)"\s(?P<status>\d+)\s'
+    pat += r'(?P<size>\d+)\s"(?P<referer>[^"]*)"\s"(?P<agent>[^"]+)"\s"(?P<forwarded>\d{1,3}(?:\.\d{1,3}){3})"\s(?P<response>.*)'
     regex = re.compile(pat)
     location_tbl = {}
     starlink = "153.66.9"
@@ -26,12 +27,14 @@ class AccessLogEntry(object):
         self.log_entry = line
         self.ipaddr = None
         self._location = None
-        self.utc = self.unknown
-        self.op = self.unknown
-        self.status = self.unknown
-        self.referer = self.unknown
-        self.agent = self.unknown
         self.load_attrs()
+
+    def __getattr__(self, name):
+        return self.unknown
+
+
+    def __str__(self):
+        return f"{self.est}   {self.ipaddr:<16} {self.location:<40.38} {self.status:<5.3} {self.referer:<30.28} {self.op:<50.48} {self.agent:<50.50}"
 
     @property
     def url(self):
@@ -40,14 +43,8 @@ class AccessLogEntry(object):
     def load_attrs(self):
         m = self.regex.search(self.log_entry)
         if m:
-            self.ipaddr = m.group("ip")
-            self.utc = m.group("utc")
-            self.op = m.group("op")
-            self.status = m.group("status")
-            self.referer = m.group("referer")
-            self.agent = m.group("agent")
-        else:
-            self.ipaddr = self.unknown
+            for k, v in m.groupdict().items():
+                setattr(self, k, v)
 
     @property
     def location(self):
@@ -85,9 +82,6 @@ class AccessLogEntry(object):
         self.location_tbl[self.ipaddr] = v
         return success
 
-    def print(self):
-            print(f"{self.est}   {self.ipaddr:<16} {self.location:<40.38} {self.status:<5.3} {self.referer:<30.28} {self.op:<50.48} {self.agent:<50.50}")
-
     @property
     def est(self):
         if self.utc == self.unknown:
@@ -100,8 +94,7 @@ def main(log):
     with open(log, "r") as f:
         lines = f.readlines()
         for l in lines:
-            ale = AccessLogEntry(l)
-            ale.print()
+            print(AccessLogEntry(l))
 
 if __name__ == "__main__":
     main(sys.argv[1])
