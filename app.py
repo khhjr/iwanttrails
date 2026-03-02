@@ -100,9 +100,12 @@ def contact():
     email = request.form.get("email")
     phone = request.form.get("phone")
     message = request.form.get("message")
-    ts = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%S')
-    write_forms(f"\n{ts}\nmessage\n{name}\n{email}\n{phone}\n{message}\n----\n")
-    return {"status": "success"}
+    if (name and email):
+        ts = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%S')
+        write_forms(f"\n{ts}\nmessage\n{name}\n{email}\n{phone}\n{message}\n----\n")
+        return {"status": "success"}
+    else:
+        return "Bad request", 400
 
 @app.route("/get_messages")
 def get_messages():
