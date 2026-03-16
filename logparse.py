@@ -9,6 +9,7 @@
 # to 45 per minute. So the script sleeps for 1 minute when a lookup fails.
 #
 
+import os
 import re
 import sys
 import time
@@ -33,7 +34,8 @@ class AccessLogEntry(object):
         "gptbot",
         "openai",
         "robot",
-        "bot.html"
+        "bot.html",
+        "crawler"
     ]
     bot_label = "---BOT"
     _lookup_count = 1
@@ -107,13 +109,26 @@ class AccessLogEntry(object):
         return (utc + datetime.timedelta(hours=-5))
 
 
-def main(log):
+def logit(log, output_file, mode="a+"):
 
-    with open(log, "r") as f:
-        lines = f.readlines()
-        for l in lines:
-            print(AccessLogEntry(l))
+    with open(output_file, mode) as fout:
+        sys.stdout = fout
+        with open(log, "r") as fin:
+            lines = fin.readlines()
+            for l in lines:
+                try:
+                    print(AccessLogEntry(l))
+                except Exception:
+                    print(l)
+    sys.stdout = sys.__stdout__
+
 
 
 if __name__ == "__main__":
-    main(sys.argv[1])
+    if len(sys.argv) < 3:
+        print("logparse.py input output [new_file]")
+        sys.exit(-1)
+    if len(sys.argv) == 4:
+        logit(sys.argv[1], sys.argv[2], "w")
+    else:
+        logit(sys.argv[1], sys.argv[2])

@@ -1,6 +1,6 @@
 import os, dotenv, random, yaml
 from datetime import datetime, timezone
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, Response
 
 
 debug = os.getenv("WEB_DEBUG")
@@ -120,6 +120,17 @@ def get_messages():
     else:
         write_forms(f"\n{ts}\nget messages access denied\n{password}\n++++\n")
         return "Access denied", 403
+
+@app.route("/accesslog123")
+def log_access():
+    try:
+        access_log = os.path.join(home, "access.log")
+        with open(access_log, "r") as f:
+            content = f.read()
+        return Response(content, mimetype='text/plain')
+    except Exception:
+        return "Bad request", 400
+
 
 if __name__ == '__main__':
     app.run(debug=True)
